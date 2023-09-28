@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CustomPlayerController.swift
 //  TestTVOS
 //
 //  Created by manjil rajbhandari on 28/09/2023.
@@ -8,46 +8,34 @@
 import UIKit
 import AVKit
 
-class ViewController: UIViewController {
-   var isFavorited = false
-    var avPlayer: AVPlayer!
+class CustomPlayerController: AVPlayerViewController {
+    var isFavorited = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        // Do any additional setup after loading the view.
+        
+        if let url = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")  {
+            let playerItem = AVPlayerItem(url: url)
+            playerItem.externalMetadata = createMetadataItems()
+            let  avPlayer = AVPlayer(playerItem: playerItem)
+            let controller = AVPlayerViewController()
+            player = avPlayer
+            view.backgroundColor = .yellow
+            transportBarCustomMenuItems = [createFavoriteAction(), createMenu()]
+            avPlayer.play()
+            let bonusContentViewController = UIViewController()
+            bonusContentViewController.view.backgroundColor = .red
+            bonusContentViewController.title = "Bonus"
+            let relatedContentViewController = UIViewController()
+            relatedContentViewController.view.backgroundColor = .blue
+            relatedContentViewController.title = "Related"
+            customInfoViewControllers = [
+                bonusContentViewController,
+                relatedContentViewController
+            ]
+        }
+        addLaterWatchAction()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        if let url = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")  {
-//            let playerItem = AVPlayerItem(url: url)
-//            playerItem.externalMetadata = createMetadataItems()
-//             avPlayer = AVPlayer(playerItem: playerItem)
-//            let controller = AVPlayerViewController()
-//            controller.player = avPlayer
-//            controller.view.backgroundColor = .yellow
-//            controller.transportBarCustomMenuItems = [createFavoriteAction(), createMenu()]
-//            present(controller, animated: true) {
-//                //avPlayer.play()
-//            }
-//            avPlayer.play()
-//            let bonusContentViewController = UIViewController()
-//            bonusContentViewController.view.backgroundColor = .red
-//            bonusContentViewController.title = "Bonus"
-//            let relatedContentViewController = UIViewController()
-//            relatedContentViewController.view.backgroundColor = .blue
-//            relatedContentViewController.title = "Related"
-//            controller.customInfoViewControllers = [
-//                bonusContentViewController,
-//                relatedContentViewController
-//            ]
-//
-//
-//        }
-         present(CustomPlayerController(), animated: true)
-    }
-   
-    func createMetadataItems() -> [AVMetadataItem] {
+    private  func createMetadataItems() -> [AVMetadataItem] {
         let mapping: [AVMetadataIdentifier: Any] = [
             .commonIdentifierTitle: "Big Buck Bunny",
             .iTunesMetadataTrackSubTitle: "Big Buck Bunny Short",
@@ -58,8 +46,6 @@ class ViewController: UIViewController {
         ]
         return mapping.compactMap { createMetadataItem(for:$0, value:$1) }
     }
-
-
     private func createMetadataItem(for identifier: AVMetadataIdentifier,
                                     value: Any) -> AVMetadataItem {
         let item = AVMutableMetadataItem()
@@ -101,9 +87,9 @@ class ViewController: UIViewController {
 
 
         let speedActions = ["Half": 0.5, "Default": 1.0, "Double": 2.0].map { title, value in
-            UIAction(title: title, state: self.avPlayer.rate == value ? .on : .off) { [weak self] action in
+            UIAction(title: title, state: self.player?.rate == value ? .on : .off) { [weak self] action in
                 // Update the current playback speed.
-                self?.avPlayer.rate = value
+                self?.player?.rate = value
                 action.state = .on
             }
         }
@@ -118,4 +104,15 @@ class ViewController: UIViewController {
         // Create the main menu.
         return UIMenu(title: "Preferences", image: gearImage, children: [loopAction, submenu])
     }
+    
+    private func addLaterWatchAction()  {
+        let glasses = UIImage(systemName: "eyeglasses")
+        let watchLater = UIAction(title: "Watch Later", image: glasses) { action in
+            // Add or remove the item from the user's watch list,
+            // and update the action state accordingly.
+        }
+        // Append the action to the array.
+        infoViewActions.append(watchLater)
+    }
 }
+

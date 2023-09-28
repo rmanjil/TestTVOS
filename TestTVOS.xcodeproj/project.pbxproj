@@ -15,6 +15,7 @@
 		0DC56D4F2AC53845002F2D53 /* TestTVOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC56D4E2AC53845002F2D53 /* TestTVOSTests.swift */; };
 		0DC56D592AC53845002F2D53 /* TestTVOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC56D582AC53845002F2D53 /* TestTVOSUITests.swift */; };
 		0DC56D5B2AC53845002F2D53 /* TestTVOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC56D5A2AC53845002F2D53 /* TestTVOSUITestsLaunchTests.swift */; };
+		0DC56D682AC54C66002F2D53 /* CustomPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC56D672AC54C66002F2D53 /* CustomPlayerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		0DC56D542AC53845002F2D53 /* TestTVOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTVOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DC56D582AC53845002F2D53 /* TestTVOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTVOSUITests.swift; sourceTree = "<group>"; };
 		0DC56D5A2AC53845002F2D53 /* TestTVOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTVOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0DC56D672AC54C66002F2D53 /* CustomPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				0DC56D3E2AC53843002F2D53 /* Main.storyboard */,
 				0DC56D412AC53844002F2D53 /* Assets.xcassets */,
 				0DC56D432AC53844002F2D53 /* LaunchScreen.storyboard */,
+				0DC56D672AC54C66002F2D53 /* CustomPlayerController.swift */,
 			);
 			path = TestTVOS;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			files = (
 				0DC56D3D2AC53843002F2D53 /* ViewController.swift in Sources */,
 				0DC56D3B2AC53843002F2D53 /* AppDelegate.swift in Sources */,
+				0DC56D682AC54C66002F2D53 /* CustomPlayerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
